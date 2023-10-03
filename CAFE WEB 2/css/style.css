@@ -5,6 +5,8 @@
   --white: #fff;
   --light-color: #666;
   --border: .2rem solid var(--black);
+  --overlay-color: rgba(0, 0, 0, 0.7); /* Default color with opacity */
+  --overlay-opacity: 0.7; /* Default opacity */
   --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
@@ -136,7 +138,7 @@ section {
 
 .home-bg {
   background: -webkit-gradient(linear, left top, right top, from(var(--white)), color-stop(70%, transparent)), url(../images/home-bg.jpg) no-repeat;
-  background: linear-gradient(90deg, var(--white), transparent 70%), url(../images/home-bg.jpg) no-repeat;
+  background: linear-gradient(90deg, var(--white), transparent 140%), url(../images/home-bg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -145,6 +147,7 @@ section {
   min-height: 70rem;
   display: -webkit-box;
   display: -ms-flexbox;
+  margin-left: 15rem;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -152,8 +155,16 @@ section {
 }
 
 .home-bg .home .content {
-  width: 50rem;
+  width: 60rem;
   text-align: center;
+}
+
+.home-bg .home .content h2 {
+  font-size: 1.5rem;
+  color: var(--black);
+  font-family: 'Merienda One';
+  line-height: 2;
+  margin: rem;
 }
 
 .home-bg .home .content h3 {
@@ -164,6 +175,7 @@ section {
 
 .home-bg .home .content p {
   padding: 1rem 0;
+  font-weight: 900;
   font-size: 1.6rem;
   color: var(--black);
   line-height: 2;
@@ -271,6 +283,12 @@ section {
   color: var(--black);
 }
 
+
+
+
+
+
+/* Updated CSS */
 .gallery .box-container {
   display: -ms-grid;
   display: grid;
@@ -282,12 +300,63 @@ section {
           justify-content: center;
 }
 
-.gallery .box-container img {
+.gallery .box-container .image-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 100%; /* Maintain a 1:1 aspect ratio for the container */
+}
+
+.gallery .box-container .image-container .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery .box-container .image-container img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
+  transition: filter 0.3s; /* Smooth transition for the blur effect */
 }
+
+.gallery .box-container .image-container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-color); /* Adjust the background color and opacity as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s; /* Smooth transition for the overlay */
+}
+
+.gallery .box-container .image-container:hover img {
+  filter: blur(5px); /* Apply blur effect on hover */
+}
+
+.gallery .box-container .image-container:hover .overlay {
+  opacity: 1; /* Show the overlay on hover */
+}
+
+.gallery .box-container .image-container .see-more {
+  color: white; /* Adjust the text color as needed */
+  font-size: 3rem; /* Adjust the font size as needed */
+  text-align: center; /* Center the text horizontally */
+  text-transform: uppercase; /* Convert text to uppercase (optional) */
+}
+
+
+
+
+
+
+
 
 .team .box-container {
   display: -ms-grid;
